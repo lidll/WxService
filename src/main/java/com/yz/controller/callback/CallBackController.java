@@ -1,6 +1,7 @@
 package com.yz.controller.callback;
 
 import com.yz.service.WxService;
+import com.yz.utils.MessageFormatUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,15 +24,12 @@ import java.util.Map;
 @Slf4j
 public class CallBackController {
 
-    @Autowired
-    private WxService wxService;
-
     @PostMapping("/success")
     public void success(HttpServletRequest request){
         log.info("/callback/success~~~~~~~~~~~~~~~~~");
         try {
             request.setCharacterEncoding("UTF-8");
-            Map<String, String> params = wxService.parseRequest(request.getInputStream());
+            Map<String, String> params = MessageFormatUtil.parseRequest(request.getInputStream());
             log.info("接收消息:" + params.toString());
         } catch (IOException e) {
             e.printStackTrace();

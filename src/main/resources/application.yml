@@ -4,36 +4,26 @@ server:
 #微信接入token
 wxCheck:
   token: 123
-#  APPID: wxd139e74b7215da86
-#  APPSECRET: 56f664953944dfab1867e605e94a4d13
-# 测试账号
-#  APPID: wx55fb54f621480c04
-#  APPSECRET: a520bb2d00e43024781c918cde48de85
-#虾仔杂货铺
+  #  APPID: wxd139e74b7215da86
+  #  APPSECRET: 56f664953944dfab1867e605e94a4d13
+  #虾仔杂货铺
   APPID: wxb6d4e2c11031e0b5
   APPSECRET: 1cda4f447dd4dfd09099193001da02db
+
 spring:
   application:
     name: WxService
-#  cloud:
-#    nacos:
-#      discovery:
-#        # 注册地址，不需要写协议
-#        server-addr: 47.115.16.147:8848
-#
-#        # 命名空间，不同命名空间之间不能调用，用于环境隔离
-#        # 开发环境
-#        # namespace: acd952e0-7c60-4c6b-9854-6daa22d12d4c
-#        # 生产环境
-#        namespace: b3fc5191-46e0-4b30-a912-3b4740d96e16
-#
-#        # 分组，不同分组之间不能调用，用于微服务之间的隔离
-#        group: DEFAULT_GROUP
-#
-#        # 集群名称【有 BJ 和 NJ】，不同集群之间可以调用，但是在设计负载均衡策略的时候要避免跨机房集群调用
-#        # cluster-name: BJ
-#
-#        # 元数据，让配置更加灵活
-#        metadata:
-#          # 比如灰度发布时，可以跨集群调用，但是不能跨版本调用
-#          version: v1
+  datasource:
+    username: root
+    password: 123456
+    url: jdbc:mysql://localhost:3306/WxService?userUnicode=true&characterEncoding=utf-8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+#映射文件位置
+mybatis:
+  mapper-locations: classpath:mybatis/mapper/*.xml
+  type-aliases-package: com.yz.domain.do
+#sql日志
+logging:
+  level:
+    com.yz.dao: debug
+

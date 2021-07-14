@@ -9,13 +9,14 @@ import com.yz.wxEntity.message.BaseMessage;
 import com.yz.wxEntity.message.NewsMessage;
 import com.yz.wxEntity.message.TextMessage;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Map;
 
 /**
- * @ClassName DealService
+ * @ClassName DealMsgService
  * @Description 消息处理service
  * @Author noah
  * @Date 2021/7/12 17:22
@@ -24,6 +25,9 @@ import java.util.Map;
 @Service
 @Slf4j
 public class DealMsgService {
+
+    @Autowired
+    EatAnswerService eatAnswerService;
 
     /**
      * @param requestMap
@@ -42,13 +46,12 @@ public class DealMsgService {
             article.add(new Article("这是一个图文消息", "这是图文消息的描述", "", "http://www.baidu.com"));
             return new NewsMessage(requestMap, article);
         }
-        String fromUserName = requestMap.get("FromUserName");
         String answer = "我有点糊涂了~~ (´･_･`)";
         if (content.contains("吃什么")) {
-            answer = "香干回锅肉";
+            answer = eatAnswerService.resolve(content);
         } else {
             //普通聊天从问答机器人获取回复
-            answer = ChatUtil.getRequest(content, fromUserName).replace("{br}", "\n");
+            answer = ChatUtil.getRequest(content, requestMap.get("FromUserName")).replace("{br}", "\n");
         }
         return new TextMessage(requestMap, answer);
     }

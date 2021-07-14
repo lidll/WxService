@@ -1,4 +1,4 @@
-package com.yz.dto;
+package com.yz.domain.dto;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -70,6 +70,13 @@ public class ResponseDto<T> {
         ResponseDto httpResponseDto = new ResponseDto();
         httpResponseDto.setCode(500);
         httpResponseDto.setMsg(errmsg);
+        return httpResponseDto;
+    }
+
+    public static ResponseDto construct(List rows,int total) {
+        ResponseDto httpResponseDto = new ResponseDto();
+        httpResponseDto.setRows(rows);
+        httpResponseDto.setTotal(total);
         return httpResponseDto;
     }
 }

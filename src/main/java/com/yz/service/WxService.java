@@ -3,6 +3,8 @@ package com.yz.service;
 import com.alibaba.fastjson.JSONObject;
 import com.thoughtworks.xstream.XStream;
 import com.yz.constant.WxCon;
+import com.yz.domain.DO.UserInfoDO;
+import com.yz.utils.ListUtil;
 import com.yz.wxEntity.*;
 import com.yz.wxEntity.message.*;
 import com.yz.utils.HttpRequestUtil;
@@ -25,8 +27,8 @@ import java.io.InputStream;
 import java.util.*;
 
 /**
- * @ClassName WxCheckService
- * @Description TODO
+ * @ClassName WxService
+ * @Description 微信消息处理service
  * @Author noah
  * @Date 2019-08-23 11:40
  * @Version 1.0
@@ -38,32 +40,11 @@ public class WxService {
     @Autowired
     private DealMsgService dealMsgService;
 
-    /**
-     * @param is
-     * @return java.util.Map<java.lang.String, java.lang.String>
-     * @Author yz
-     * @Description 解析xml为map
-     * @Date 2019-08-23 17:55
-     */
-    public Map<String, String> parseRequest(InputStream is) {
-        Map<String, String> map = new HashMap<String, String>();
-        SAXReader reader = new SAXReader();
-        try {
-            //读取输入流,获取文档对象
-            Document document = reader.read(is);
-            //根据文档对象获取根节点
-            Element rootElement = document.getRootElement();
-            //获取根节点的所有子节点
-            List<Element> elements = rootElement.elements();
-            for (Element element : elements) {
-                map.put(element.getName(), element.getStringValue());
-            }
-            return map;
-        } catch (DocumentException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
+    @Autowired
+    private DealEventService dealEventService;
+
+    @Autowired
+    private UserInfoService userInfoService;
 
     /**
      * @param requestMap
@@ -73,6 +54,12 @@ public class WxService {
      * @Date 2019-08-23 17:57
      */
     public String getResponse(Map<String, String> requestMap) {
+        //处理用户
+        String openId = requestMap.get("FromUserName");
+        List<UserInfoDO> userInfoDOList = userInfoService.getByOpenId(openId);
+        if (ListUtil.isEmpty(userInfoDOList)) {
+            userInfoService.save(new UserInfoDO(openId));
+        }
         BaseMessage msg = null;
         String msgType = requestMap.get("MsgType");
         switch (msgType) {
@@ -97,7 +84,7 @@ public class WxService {
             case "news":
                 break;
             case "event":
-                msg = dealEvent(requestMap);
+                msg = dealEventService.dealEvent(requestMap);
         }
         if (msg == null) {
             return null;
@@ -105,41 +92,6 @@ public class WxService {
         log.info(msg.toString());
         //包消息对象处理为xml数据表
         return beanToXml(msg);
-    }
-
-
-
-    /**
-     * @param requestMap
-     * @return com.yz.wxEntity.message.BaseMessage
-     * @Author yz
-     * @Description 事件处理
-     * @Date 2019-08-27 11:28
-     */
-    private BaseMessage dealEvent(Map<String, String> requestMap) {
-        String event = requestMap.get("Event");
-        switch (event) {
-            //取消关注
-            case "unsubscribe":
-                return EventService.dealUnsubscribe(requestMap);
-            //关注
-            case "subscribe":
-                return EventService.dealSubscribe(requestMap);
-            //点击按钮
-            case "CLICK":
-                //个人公众号开启开发者模式没有菜单
-//                return EventService.dealClient(requestMap);
-                return null;
-            //跳转按钮
-            case "VIEW":
-                return EventService.dealView(requestMap);
-                //图片事件
-            case "pic_photo_or_album":
-                return EventService.dealPic(requestMap);
-
-            default:
-                return null;
-        }
     }
 
     /**
@@ -159,6 +111,4 @@ public class WxService {
         xStream.processAnnotations(VoiceMessage.class);
         return xStream.toXML(msg);
     }
-
-
 }

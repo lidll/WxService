@@ -1,5 +1,6 @@
-package com.yz.controller.message;
+package com.yz.controller.success;
 
+import com.yz.utils.MessageFormatUtil;
 import com.yz.utils.TokenUtil;
 import com.yz.service.WxService;
 import org.slf4j.Logger;
@@ -25,9 +26,9 @@ import java.util.Map;
  **/
 @RestController
 @RequestMapping("/wx")
-public class WxMsgController {
+public class WxSuccessController {
 
-    private static final Logger log = LoggerFactory.getLogger(WxMsgController.class);
+    private static final Logger log = LoggerFactory.getLogger(WxSuccessController.class);
 
     @Autowired
     TokenUtil tokenUtil;
@@ -92,7 +93,7 @@ public class WxMsgController {
         try {
             request.setCharacterEncoding("UTF-8");
             //转换消息为map
-            Map<String, String> params = wxService.parseRequest(request.getInputStream());
+            Map<String, String> params = MessageFormatUtil.parseRequest(request.getInputStream());
             log.info("回复用户消息接口>接收消息:" + params.toString());
             //消息处理
             String messageStr = wxService.getResponse(params);
