@@ -2,7 +2,7 @@
 //
 //import com.alibaba.fastjson.JSON;
 //import com.google.common.collect.ImmutableMap;
-//import com.yz.service.WxService;
+//import com.yz.service.impl.WxService;
 //import com.yz.utils.HttpRequestUtil;
 //import org.junit.jupiter.api.Test;
 //

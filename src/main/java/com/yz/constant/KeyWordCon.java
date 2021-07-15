@@ -9,5 +9,9 @@ package com.yz.constant;
  **/
 public class KeyWordCon {
 
-    public static final String EAT_WHAT = "吃什么";
+    public static final String EAT_WHAT_1 = "吃什么";
+
+    public static final String EAT_WHAT_2 = "吃啥";
+
+    public static final String COMMAND_PREFIX = "cmd:";
 }

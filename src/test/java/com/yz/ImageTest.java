@@ -9,7 +9,7 @@ import com.yz.utils.TokenUtil;
 import com.yz.wxEntity.BaiduClient;
 import com.yz.wxEntity.button.*;
 import com.yz.wxEntity.message.*;
-import com.yz.service.WxService;
+import com.yz.service.impl.WxService;
 import org.json.JSONObject;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;

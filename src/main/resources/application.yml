@@ -1,6 +1,6 @@
 server:
   session-timeout: 1800
-  port: 7999
+  port: 11202
 #微信接入token
 wxCheck:
   token: 123

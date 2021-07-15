@@ -1,29 +1,14 @@
-package com.yz.service;
+package com.yz.service.impl;
 
-import com.alibaba.fastjson.JSONObject;
 import com.thoughtworks.xstream.XStream;
-import com.yz.constant.WxCon;
 import com.yz.domain.DO.UserInfoDO;
+import com.yz.service.UserInfoService;
 import com.yz.utils.ListUtil;
-import com.yz.wxEntity.*;
 import com.yz.wxEntity.message.*;
-import com.yz.utils.HttpRequestUtil;
-import com.yz.utils.ChatUtil;
-import com.yz.utils.PicAiUtil;
-import com.yz.utils.SHA1;
 import lombok.extern.slf4j.Slf4j;
-import org.dom4j.Document;
-import org.dom4j.DocumentException;
-import org.dom4j.Element;
-import org.dom4j.io.SAXReader;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import java.io.InputStream;
 import java.util.*;
 
 /**

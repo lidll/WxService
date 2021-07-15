@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  * @ClassName ListUtil
- * @Description TODO
+ * @Description 集合工具
  * @Author noah
  * @Date 2021/7/13 11:33
  * @Version 1.0

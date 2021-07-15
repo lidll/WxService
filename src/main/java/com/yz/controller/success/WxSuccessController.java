@@ -2,7 +2,7 @@ package com.yz.controller.success;
 
 import com.yz.utils.MessageFormatUtil;
 import com.yz.utils.TokenUtil;
-import com.yz.service.WxService;
+import com.yz.service.impl.WxService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

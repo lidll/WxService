@@ -1,7 +1,5 @@
 package com.yz;
 
-import com.alibaba.fastjson.JSON;
-import com.sun.javaws.jnl.XMLFormat;
 import com.thoughtworks.xstream.XStream;
 import com.yz.utils.HttpRequestUtil;
 import org.junit.Test;

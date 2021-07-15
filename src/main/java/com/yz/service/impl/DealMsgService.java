@@ -1,6 +1,8 @@
-package com.yz.service;
+package com.yz.service.impl;
 
+import com.yz.constant.KeyWordCon;
 import com.yz.constant.WxCon;
+import com.yz.service.CommandStrategy;
 import com.yz.utils.ChatUtil;
 import com.yz.utils.PicAiUtil;
 import com.yz.wxEntity.FlagArgument;
@@ -29,6 +31,9 @@ public class DealMsgService {
     @Autowired
     EatAnswerService eatAnswerService;
 
+    @Autowired
+    CommandService commandService;
+
     /**
      * @param requestMap
      * @return com.yz.wxEntity.message.BaseMessage
@@ -40,18 +45,30 @@ public class DealMsgService {
         log.info("dealText Service ~~~~~~~~~~~~~~" + requestMap.toString());
         //用户发来的消息内容
         String content = requestMap.get("Content");
+        String answer = null;
 
+        //图文消息
         if (content.equals("图文")) {
             ArrayList<Article> article = new ArrayList<>();
             article.add(new Article("这是一个图文消息", "这是图文消息的描述", "", "http://www.baidu.com"));
             return new NewsMessage(requestMap, article);
         }
-        String answer = "我有点糊涂了~~ (´･_･`)";
-        if (content.contains("吃什么")) {
-            answer = eatAnswerService.resolve(content);
-        } else {
-            //普通聊天从问答机器人获取回复
-            answer = ChatUtil.getRequest(content, requestMap.get("FromUserName")).replace("{br}", "\n");
+        //命令模式 cmd: 开头
+        if (content.startsWith(KeyWordCon.COMMAND_PREFIX)) {
+            answer = commandService.resolve(content);
+            return new TextMessage(requestMap, answer);
+        }
+
+        //普通回复
+        try {
+            if (content.contains(KeyWordCon.EAT_WHAT_1) ||content.contains(KeyWordCon.EAT_WHAT_2)) {
+                answer = eatAnswerService.resolve(content);
+            } else {
+                //普通聊天从问答机器人获取回复
+                answer = ChatUtil.getRequest(content, requestMap.get("FromUserName")).replace("{br}", "\n");
+            }
+        } catch (Exception e) {
+            answer = "我有点糊涂了~~ (´･_･`)";
         }
         return new TextMessage(requestMap, answer);
     }

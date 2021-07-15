@@ -1,4 +1,4 @@
-package com.yz.service;
+package com.yz.service.impl;
 
 import com.yz.constant.WxCon;
 import com.yz.wxEntity.FlagArgument;
