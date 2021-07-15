@@ -25,7 +25,7 @@ import java.util.Map;
  * @Version 1.0
  **/
 @RestController
-@RequestMapping("/wx")
+@RequestMapping("/wxService/wx")
 public class WxSuccessController {
 
     private static final Logger log = LoggerFactory.getLogger(WxSuccessController.class);

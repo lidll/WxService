@@ -1,8 +1,11 @@
 package com.yz;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.data.redis.core.StringRedisTemplate;
 
 /**
  * @ClassName WxServiceApplication
@@ -15,6 +18,6 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 @ServletComponentScan
 public class WxServiceApplication {
     public static void main(String[] args) {
-        SpringApplication.run(WxServiceApplication.class,args);
+        ConfigurableApplicationContext run = SpringApplication.run(WxServiceApplication.class, args);
     }
 }

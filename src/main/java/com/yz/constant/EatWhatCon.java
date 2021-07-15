@@ -13,7 +13,11 @@ public class EatWhatCon {
             "要不试试%s?",
             "就吃%s吧!",
             "嗯~让我想想,今天吃%s好了!",
-            "吃%s它不香嘛?"
+            "吃%s它不香嘛?",
+            "推荐你尝一尝%s,很美味的~",
+            "点一份%s吧,对自己好一点",
+            "就吃%s,就是任性!",
+            "勉为其难吃点%s咯"
     };
 
     public static final Integer DISH_TYPE_BREAKFAST = 1;

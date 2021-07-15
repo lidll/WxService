@@ -34,5 +34,6 @@ public class DishInfoDO implements Serializable {
 	public DishInfoDO(String name){
 		this.createDate = new Date();
 		this.type = EatWhatCon.DISH_TYPE_OTHER;
+		this.name = name;
 	}
 }

@@ -18,4 +18,9 @@ public class ListUtil {
         }
         return false;
     }
+
+
+    public static boolean isNotEmpty(Collection c){
+        return !isEmpty(c);
+    }
 }

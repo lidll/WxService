@@ -61,7 +61,7 @@ public class DealMsgService {
 
         //普通回复
         try {
-            if (content.contains(KeyWordCon.EAT_WHAT_1) ||content.contains(KeyWordCon.EAT_WHAT_2)) {
+            if (content.contains(KeyWordCon.EAT_WHAT_1) ||content.contains(KeyWordCon.EAT_WHAT_2) ||content.contains(KeyWordCon.EAT_WHAT_3)) {
                 answer = eatAnswerService.resolve(content);
             } else {
                 //普通聊天从问答机器人获取回复

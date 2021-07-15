@@ -1,7 +1,10 @@
 package com.yz.service.impl;
 
 import com.yz.constant.KeyWordCon;
+import com.yz.constant.RedisKeyCon;
 import com.yz.utils.EatWhatTemplateUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.Random;
@@ -16,13 +19,12 @@ import java.util.Random;
 @Service
 public class EatAnswerService {
 
-
-    String[] dishMenu = {"炒菜","烫饭","泡面","拉面","擂饭","盖浇饭","饺子","羊肉粉","牛肉面","面包","黄焖鸡","喷射套餐","生烫"};
-
+    @Autowired
+    private StringRedisTemplate redisTemplate;
 
     public String resolve(String content){
         Random random = new Random();
-        int i = random.nextInt(dishMenu.length);
-        return EatWhatTemplateUtil.formatAnswer(dishMenu[i]);
+        String dishName = redisTemplate.opsForSet().randomMember(RedisKeyCon.DISH_SERVICE_REDIS_KEY);
+        return EatWhatTemplateUtil.formatAnswer(dishName);
     }
 }
