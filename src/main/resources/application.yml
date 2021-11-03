@@ -4,10 +4,6 @@ spring:
   profiles:
     active: dev
 
-server:
-  port: 7998
-  session-timeout: 1800
-
 #sql日志
 logging:
   level:

@@ -1,4 +1,4 @@
-package com.yz.service;
+package com.yz.strategy;
 
 import com.yz.domain.entity.CommandEntity;
 
@@ -19,5 +19,5 @@ public interface CommandStrategy {
      * @param commandEntity
      * @return int
      */
-    public String excute(CommandEntity commandEntity);
+    String excute(CommandEntity commandEntity);
 }

@@ -1,6 +1,5 @@
 package com.yz.service.impl;
 
-import com.yz.constant.KeyWordCon;
 import com.yz.constant.RedisKeyCon;
 import com.yz.utils.EatWhatTemplateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +22,6 @@ public class EatAnswerService {
     private StringRedisTemplate redisTemplate;
 
     public String resolve(String content){
-        Random random = new Random();
         String dishName = redisTemplate.opsForSet().randomMember(RedisKeyCon.DISH_SERVICE_REDIS_KEY);
         return EatWhatTemplateUtil.formatAnswer(dishName);
     }

@@ -1,9 +1,11 @@
 package com.yz.service.impl;
-
 import com.yz.constant.CommandCon;
 import com.yz.domain.entity.CommandEntity;
-import com.yz.service.CommandStrategy;
+import com.yz.factory.CommandFactory;
+import com.yz.strategy.CommandStrategy;
+import com.yz.strategy.DishStrategy;
 import com.yz.utils.EntityUtil;
+import org.aspectj.weaver.ast.Var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,22 +20,14 @@ import org.springframework.stereotype.Service;
 public class CommandService {
 
     @Autowired
-    private CommandHandler commandHandler;
-
-    //菜谱的策略
-    @Autowired
-    private DishStrategy dishStrategy;
+    private CommandFactory commandFactory;
 
     public String resolve(String content){
         CommandEntity commandEntity = EntityUtil.commandEntity(content);
         if (commandEntity == null) {
             return CommandCon.ERROR;
         }
-        if (CommandCon.SERVICE_NAME_DISH.equals(commandEntity.getService())){
-            commandHandler.setCommandStrategy(dishStrategy);
-        }
-        return commandHandler.excute(commandEntity);
-
-
+        CommandStrategy strategy = commandFactory.getStrategy(commandEntity.getService());
+        return strategy.excute(commandEntity);
     }
 }

@@ -12,7 +12,7 @@
     </parent>
 
     <groupId>lifeidll</groupId>
-    <artifactId>WxService</artifactId>
+    <artifactId>wxService</artifactId>
     <description>微信公众号增强聊天</description>
     <packaging>jar</packaging>
     <version>1.0</version>

@@ -1,8 +1,8 @@
 package com.yz.service.impl;
 
-import com.yz.constant.KeyWordCon;
+import com.yz.constant.CommandCon;
+import com.yz.constant.TextMsgKeyWordCon;
 import com.yz.constant.WxCon;
-import com.yz.service.CommandStrategy;
 import com.yz.utils.ChatUtil;
 import com.yz.utils.PicAiUtil;
 import com.yz.wxEntity.FlagArgument;
@@ -46,40 +46,38 @@ public class DealMsgService {
         //用户发来的消息内容
         String content = requestMap.get("Content");
         String answer = null;
-
-        //图文消息
-        if (content.equals("图文")) {
-            ArrayList<Article> article = new ArrayList<>();
-            article.add(new Article("这是一个图文消息", "这是图文消息的描述", "", "http://www.baidu.com"));
-            return new NewsMessage(requestMap, article);
-        }
-        //命令模式 cmd: 开头
-        if (content.startsWith(KeyWordCon.COMMAND_PREFIX)) {
-            answer = commandService.resolve(content);
-            return new TextMessage(requestMap, answer);
-        }
-
-        //普通回复
         try {
-            if (content.contains(KeyWordCon.EAT_WHAT_1) ||content.contains(KeyWordCon.EAT_WHAT_2) ||content.contains(KeyWordCon.EAT_WHAT_3)) {
+            //接收图文消息
+            if (content.equals("图文")) {
+                ArrayList<Article> article = new ArrayList<>();
+                article.add(new Article("这是一个图文消息", "这是图文消息的描述", "", "http://tinto.top"));
+                return new NewsMessage(requestMap, article);
+            }
+            //接收命令 "c:" 开头
+            if (content.startsWith(CommandCon.COMMAND_PREFIX)) {
+                answer = commandService.resolve(content);
+                return new TextMessage(requestMap, answer);
+            }
+            //文本消息
+            if (TextMsgKeyWordCon.containsEatWhat(content)) {
                 answer = eatAnswerService.resolve(content);
             } else {
                 //普通聊天从问答机器人获取回复
                 answer = ChatUtil.getRequest(content, requestMap.get("FromUserName")).replace("{br}", "\n");
             }
         } catch (Exception e) {
+            e.printStackTrace();
             answer = "我有点糊涂了~~ (´･_･`)";
         }
         return new TextMessage(requestMap, answer);
     }
 
     /**
-     *
+     * @param requestMap
+     * @return com.yz.wxEntity.message.BaseMessage
      * @Author yz
      * @Description 处理图片消息
      * @Date 2019-08-27 14:56
-     * @param requestMap
-     * @return com.yz.wxEntity.message.BaseMessage
      */
     public BaseMessage dealImage(Map<String, String> requestMap) {
 
@@ -89,13 +87,13 @@ public class DealMsgService {
         if (WxCon.PIC_CHECK.equals(flag)) {
             String picUrl = PicAiUtil.checkPic(requestMap.get("PicUrl"));
             FlagArgument.reset();
-            return new TextMessage(requestMap,picUrl);
-        }else if (WxCon.PIC_TO_TEXT_FLAG.equals(flag)){
+            return new TextMessage(requestMap, picUrl);
+        } else if (WxCon.PIC_TO_TEXT_FLAG.equals(flag)) {
             String picText = PicAiUtil.getPicText(requestMap.get("PicUrl"));
             FlagArgument.reset();
-            return new TextMessage(requestMap,picText);
-        }else{
-            return new TextMessage(requestMap,"请先在<更多功能>中选择图片功能");
+            return new TextMessage(requestMap, picText);
+        } else {
+            return new TextMessage(requestMap, "请先在<更多功能>中选择图片功能");
         }
 
     }

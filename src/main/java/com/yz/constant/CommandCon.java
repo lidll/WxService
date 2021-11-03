@@ -11,8 +11,6 @@ public class CommandCon {
 
     public static final String HELP = "help";
 
-    public static final String SERVICE_NAME_DISH = "dish";
-
     public static final String ADD = "add";
 
     public static final String REM = "rem";
@@ -21,6 +19,8 @@ public class CommandCon {
 
     public static final String EDIT = "edit";
 
-    public static final String SUCCESS = "succes";
+    public static final String SUCCESS = "success";
     public static final String ERROR = "error";
+
+    public static final String COMMAND_PREFIX = "c:";
 }

@@ -12,7 +12,10 @@ import lombok.Data;
 @Data
 public class CommandEntity {
 
+    //服务
     private String service;
+    //方法
     private String method;
+    //参数
     private String value;
 }

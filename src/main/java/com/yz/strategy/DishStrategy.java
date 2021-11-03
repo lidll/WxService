@@ -1,10 +1,9 @@
-package com.yz.service.impl;
+package com.yz.strategy;
 
 import com.alibaba.fastjson.JSON;
 import com.yz.constant.CommandCon;
 import com.yz.domain.DO.DishInfoDO;
 import com.yz.domain.entity.CommandEntity;
-import com.yz.service.CommandStrategy;
 import com.yz.service.DishInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -14,7 +13,7 @@ import java.util.List;
 
 /**
  * @ClassName DishStrategy
- * @Description 菜谱策略
+ * @Description 菜谱执行策略
  * @Author noah
  * @Date 2021/7/14 17:19
  * @Version 1.0
