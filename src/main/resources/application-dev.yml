@@ -1,0 +1,27 @@
+spring:
+  datasource:
+    url: jdbc:mysql://47.115.16.147:3306/WxService?userUnicode=true&characterEncoding=utf-8&autoReconnect=true
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  redis:
+    host: 47.115.16.147
+    port: 6379
+    password: 123456
+
+#映射文件位置
+mybatis:
+  mapper-locations: classpath:mybatis/mapper/*.xml
+  type-aliases-package: com.yz.domain.do
+  configuration:
+    lazy-loading-enabled: false
+    aggressive-lazy-loading: true
+
+#微信接入token
+wxCheck:
+  token: 123
+  #  APPID: wxd139e74b7215da86
+  #  APPSECRET: 56f664953944dfab1867e605e94a4d13
+  #虾仔杂货铺
+  APPID: wxb6d4e2c11031e0b5
+  APPSECRET: 1cda4f447dd4dfd09099193001da02db

@@ -5,6 +5,7 @@ import com.baidu.aip.contentcensor.AipContentCensor;
 import com.baidu.aip.contentcensor.EImgType;
 import com.baidu.aip.ocr.AipOcr;
 import com.yz.wxEntity.BaiduClient;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -36,7 +37,11 @@ public class PicAiUtil {
 
         //通用文字识别（含位置信息版）500次/天
         JSONObject res = client.generalUrl(url, new HashMap<>());
-        System.out.println(res.toString(2));
+        try {
+            System.out.println(res.toString(2));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
         List<com.alibaba.fastjson.JSONObject> jsonObjects = null;
         try {
@@ -71,7 +76,11 @@ public class PicAiUtil {
         client.setSocketTimeoutInMillis(60000);
         // 调用接口
         JSONObject res = client.imageCensorUserDefined(url, EImgType.URL,null);
-        System.out.println(res.toString(2));
+        try {
+            System.out.println(res.toString(2));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         String s = res.toString();
         com.alibaba.fastjson.JSONObject jsonObject = com.alibaba.fastjson.JSONObject.parseObject(s);
         String conclusion = jsonObject.get("conclusion").toString();

@@ -10,6 +10,7 @@ import com.yz.wxEntity.BaiduClient;
 import com.yz.wxEntity.button.*;
 import com.yz.wxEntity.message.*;
 import com.yz.service.impl.WxService;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -133,7 +134,11 @@ public class ImageTest {
         // 调用接口
         String path = "/Users/noah/Desktop/WX20190827-144939@2x.png";
         JSONObject res = client.basicGeneral(path, new HashMap<String, String>());
-        System.out.println(res.toString(2));
+        try {
+            System.out.println(res.toString(2));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -147,7 +152,11 @@ public class ImageTest {
         // 调用接口
         String path = "/Users/noah/Desktop/WechatIMG161.jpeg";
         JSONObject res = client.imageCensorUserDefined(path, EImgType.FILE,null);
-        System.out.println(res.toString(2));
+        try {
+            System.out.println(res.toString(2));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
 //    @Test
