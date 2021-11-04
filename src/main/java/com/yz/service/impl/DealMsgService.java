@@ -3,6 +3,7 @@ package com.yz.service.impl;
 import com.yz.constant.CommandCon;
 import com.yz.constant.TextMsgKeyWordCon;
 import com.yz.constant.WxCon;
+import com.yz.strategy.impl.EatAnswerStrategy;
 import com.yz.utils.ChatUtil;
 import com.yz.utils.PicAiUtil;
 import com.yz.wxEntity.FlagArgument;
@@ -29,10 +30,13 @@ import java.util.Map;
 public class DealMsgService {
 
     @Autowired
-    EatAnswerService eatAnswerService;
+    EatAnswerStrategy eatAnswerService;
 
     @Autowired
     CommandService commandService;
+
+    @Autowired
+    TextAnswerService textAnswerService;
 
     /**
      * @param requestMap
@@ -58,13 +62,8 @@ public class DealMsgService {
                 answer = commandService.resolve(content);
                 return new TextMessage(requestMap, answer);
             }
-            //文本消息
-            if (TextMsgKeyWordCon.containsEatWhat(content)) {
-                answer = eatAnswerService.resolve(content);
-            } else {
-                //普通聊天从问答机器人获取回复
-                answer = ChatUtil.getRequest(content, requestMap.get("FromUserName")).replace("{br}", "\n");
-            }
+            //普通消息
+            answer = textAnswerService.resolve(content);
         } catch (Exception e) {
             e.printStackTrace();
             answer = "我有点糊涂了~~ (´･_･`)";

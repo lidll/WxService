@@ -3,9 +3,7 @@ import com.yz.constant.CommandCon;
 import com.yz.domain.entity.CommandEntity;
 import com.yz.factory.CommandFactory;
 import com.yz.strategy.CommandStrategy;
-import com.yz.strategy.DishStrategy;
 import com.yz.utils.EntityUtil;
-import org.aspectj.weaver.ast.Var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +25,7 @@ public class CommandService {
         if (commandEntity == null) {
             return CommandCon.ERROR;
         }
+        //策略+工厂 通过命令决定走哪个service
         CommandStrategy strategy = commandFactory.getStrategy(commandEntity.getService());
         return strategy.excute(commandEntity);
     }

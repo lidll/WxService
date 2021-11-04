@@ -17,7 +17,10 @@ public class EatWhatCon {
             "推荐你尝一尝%s,很美味的~",
             "点一份%s吧,对自己好一点",
             "就吃%s,就是任性!",
-            "勉为其难吃点%s咯"
+            "勉为其难吃点%s咯",
+            "虾虾刚吃了%s,你也快试试吧!",
+            "喏,给你闻闻%s的香气~",
+            "别纠结,吃%s就对啦!"
     };
 
     public static final Integer DISH_TYPE_BREAKFAST = 1;

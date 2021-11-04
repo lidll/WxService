@@ -29,7 +29,7 @@ public class ChatUtil {
     private static final String APPKEY = "7bca2c3f460186f1b5d2d038a4db956a";
 
     //1.问答
-    public static String getRequest(String content,String userid){
+    public static String getRequest(String content){
         String result = null;
         String url = REQUEST_URL;
         Map param = new HashMap();
