@@ -59,12 +59,21 @@ public class ResponseDto<T> {
         return httpResponseDto;
     }
 
+    public static ResponseDto success(int code, Object result) {
+        ResponseDto httpResponseDto = new ResponseDto();
+        httpResponseDto.setCode(code);
+        httpResponseDto.setResult(result);
+        return httpResponseDto;
+    }
+
     public static ResponseDto error(int code, String errmsg) {
         ResponseDto httpResponseDto = new ResponseDto();
         httpResponseDto.setCode(code);
         httpResponseDto.setMsg(errmsg);
         return httpResponseDto;
     }
+
+
 
     public static ResponseDto error(String errmsg) {
         ResponseDto httpResponseDto = new ResponseDto();
