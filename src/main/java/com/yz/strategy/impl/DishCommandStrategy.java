@@ -19,7 +19,7 @@ import java.util.List;
  * @Date 2021/7/14 17:19
  * @Version 1.0
  **/
-@Component("dishc")
+@Component("dishcmd")
 public class DishCommandStrategy implements CommandStrategy {
 
     @Autowired

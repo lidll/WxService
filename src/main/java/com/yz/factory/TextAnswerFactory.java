@@ -28,12 +28,10 @@ public class TextAnswerFactory {
 
     public TextAnswerStrategy getStrategy(String content){
         TextAnswerStrategy strategy = null;
-
+        //普通聊天从问答机器人获取回复
+        strategy = textAnswerStrategyMap.get(TextAnswerEnum.BOT_ANSWER_STRATEGY.getStrategyName());
         if (TextMsgKeyWordCon.containsEatWhat(content)) {
             strategy = textAnswerStrategyMap.get(TextAnswerEnum.EAT_ANSWER_STRATEGY.getStrategyName());
-        } else {
-            //普通聊天从问答机器人获取回复
-            strategy = textAnswerStrategyMap.get(TextAnswerEnum.BOT_ANSWER_STRATEGY.getStrategyName());
         }
         return strategy;
     }

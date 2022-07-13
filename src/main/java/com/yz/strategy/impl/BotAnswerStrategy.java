@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
  * @Date 2021/11/4 14:29
  * @Version 1.0
  **/
-@Component
+@Component("bottext")
 public class BotAnswerStrategy implements TextAnswerStrategy {
     /**
      * @param content

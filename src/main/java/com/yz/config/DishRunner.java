@@ -3,6 +3,8 @@ package com.yz.config;
 import com.yz.annotation.anno.Log;
 import com.yz.constant.RedisKeyCon;
 import com.yz.domain.DO.DishInfoDO;
+import com.yz.factory.CommandFactory;
+import com.yz.factory.TextAnswerFactory;
 import com.yz.service.DishInfoService;
 import com.yz.utils.ListUtil;
 import lombok.extern.slf4j.Slf4j;

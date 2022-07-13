@@ -17,7 +17,7 @@ import java.util.Random;
  * @Date 2021/7/12 17:20
  * @Version 1.0
  **/
-@Component
+@Component("eattext")
 public class EatAnswerStrategy implements TextAnswerStrategy {
 
     @Autowired
