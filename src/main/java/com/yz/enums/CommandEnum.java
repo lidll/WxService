@@ -1,6 +1,6 @@
 package com.yz.enums;
 
-import com.yz.strategy.impl.DishStrategy;
+import com.yz.strategy.impl.DishCommandStrategy;
 import lombok.AllArgsConstructor;
 
 /**
@@ -13,7 +13,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public enum CommandEnum {
 
-    service_dish("dish","菜谱","dishStrategy", DishStrategy.class);
+    service_dish("dish","菜谱","dishStrategy", DishCommandStrategy.class);
 
 
     private String serviceName;

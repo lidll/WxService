@@ -1,7 +1,6 @@
 package com.yz.enums;
 
 import com.yz.strategy.impl.BotAnswerStrategy;
-import com.yz.strategy.impl.DishStrategy;
 import com.yz.strategy.impl.EatAnswerStrategy;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

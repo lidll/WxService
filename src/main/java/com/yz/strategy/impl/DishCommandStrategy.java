@@ -19,8 +19,8 @@ import java.util.List;
  * @Date 2021/7/14 17:19
  * @Version 1.0
  **/
-@Component
-public class DishStrategy implements CommandStrategy {
+@Component("dishc")
+public class DishCommandStrategy implements CommandStrategy {
 
     @Autowired
     private DishInfoService dishInfoService;
